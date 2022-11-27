@@ -5,6 +5,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>user-services</module>
+		<module>wallet-services</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
