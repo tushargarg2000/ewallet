@@ -11,12 +11,12 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/user")
-    public User getUserByUserId(@RequestParam("userId") String userId) throws Exception{
-        return userService.getUserByUserId(userId);
+    public User getUserByUserName(@RequestParam("userName") String userName) throws Exception{
+        return userService.getUserByUserName(userName);
     }
 
     @PostMapping("/user")
-    public void createUser(@RequestBody UserRequest userRequest) throws JsonProcessingException {
+    public void createUser(@RequestBody UserRequest userRequest) {
         userService.createUser(userRequest);
     }
 

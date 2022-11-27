@@ -25,7 +25,7 @@ public class UserService {
     }
 
 
-    public User getUserByUserId(String userName) throws Exception{
+    public User getUserByUserName(String userName) throws Exception{
         try {
                 User user = userRepository.findByUserName(userName);
                 if(user == null){
