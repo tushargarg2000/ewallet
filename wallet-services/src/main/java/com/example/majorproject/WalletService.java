@@ -11,6 +11,8 @@ public class WalletService {
 
     public void createWallet(String userName){
 
+    //Wallet w = new Wallet(1,"abc",10);
+
         Wallet wallet = Wallet.builder()
                 .userName(userName).amount(0).build();
 

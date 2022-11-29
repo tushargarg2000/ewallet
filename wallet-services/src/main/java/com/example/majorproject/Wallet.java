@@ -5,12 +5,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Builder
-@Getter
-@Table(name = "wallets")
-@Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@Data
+@AllArgsConstructor
+@Builder
+@Table(name = "wallets")
 public class Wallet {
 
 
@@ -21,7 +20,5 @@ public class Wallet {
     String userName;
 
     int amount;
-
-
 
 }
