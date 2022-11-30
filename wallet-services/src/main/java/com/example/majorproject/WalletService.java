@@ -1,6 +1,10 @@
 package com.example.majorproject;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,53 +13,19 @@ public class WalletService {
     @Autowired
     WalletRepository walletRepository;
 
-    public void createWallet(String userName){
+    @Autowired
+    ObjectMapper objectMapper;
 
-    //Wallet w = new Wallet(1,"abc",10);
+
+    public void createWallet(Wallet walletRequest) throws JsonProcessingException {
+
 
         Wallet wallet = Wallet.builder()
-                .userName(userName).amount(0).build();
+                .userName(walletRequest.getUserName())
+                .amount(0).build();
 
+        //We are saving the wallet Repository
         walletRepository.save(wallet);
-
-    }
-
-    Wallet incrementWallet(String userName,int amount)
-    {
-
-            //Method 1 to save the
-
-            Wallet oldWallet = walletRepository.findByUserName(userName);
-            int newAmount = oldWallet.getAmount() + amount;
-            int originalId = oldWallet.getId();
-
-            Wallet updatedWallet = Wallet.builder()
-                    .id(originalId)
-                    .userName(userName).amount(newAmount).build();
-
-            walletRepository.save(updatedWallet);
-
-            return updatedWallet;
-
-            //Method 2 : write the query
-//            int success = walletRepository.updateWallet(userName,amount);
-
-    }
-
-    Wallet decrementWallet(String userName,int amount){
-
-
-        Wallet oldWallet = walletRepository.findByUserName(userName);
-        int newAmount = oldWallet.getAmount() - amount;
-        int originalId = oldWallet.getId();
-
-        Wallet updatedWallet = Wallet.builder()
-                .id(originalId)
-                .userName(userName).amount(newAmount).build();
-
-        walletRepository.save(updatedWallet);
-
-        return updatedWallet;
     }
 
 
