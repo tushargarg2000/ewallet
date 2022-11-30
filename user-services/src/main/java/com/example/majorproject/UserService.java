@@ -64,7 +64,7 @@ public class UserService {
         //Converting jsonObject to String bcz message is in string format
         String message = jsonObject.toString();
 
-        kafkaTemplate.send("wallet_create",message);
+        kafkaTemplate.send("create_wallet",message);
 
     }
 

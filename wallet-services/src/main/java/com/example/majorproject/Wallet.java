@@ -15,10 +15,10 @@ public class Wallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
-    String userName;
+    private String userName;
 
-    int amount;
+    private int balance;
 
 }

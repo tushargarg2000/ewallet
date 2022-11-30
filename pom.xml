@@ -6,6 +6,7 @@
 	<modules>
 		<module>user-services</module>
 		<module>wallet-services</module>
+		<module>transaction-services</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

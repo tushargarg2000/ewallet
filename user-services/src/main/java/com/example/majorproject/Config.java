@@ -72,11 +72,13 @@ public class Config {
         return properties;
     }
 
+    @Bean
     ProducerFactory<String,String> getProducerFactory(){
 
         return new DefaultKafkaProducerFactory(kafkaProperties());
     }
 
+    @Bean
     KafkaTemplate<String,String> getKafkaTemplate(){
         return new KafkaTemplate<>(getProducerFactory());
     }
