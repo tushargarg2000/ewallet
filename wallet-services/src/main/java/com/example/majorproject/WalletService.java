@@ -72,15 +72,22 @@ public class WalletService {
             //HAPPY CASE
 
             //UPDATE THE WALLETS
-            walletRepository.updateWallet(fromUser,-1*transactionAmount);
-            walletRepository.updateWallet(toUser,transactionAmount);
+
+            Wallet fromWallet = walletRepository.findByUserName(fromUser);
+            fromWallet.setBalance(fromWallet.getBalance() - transactionAmount);
+            walletRepository.save(fromWallet);
+
+            Wallet toWallet = walletRepository.findByUserName(toUser);
+            toWallet.setBalance(toWallet.getBalance() + transactionAmount);
+            walletRepository.save(toWallet);
+
 
         //PUSH TO KAFKA
 
         JSONObject sendToTransaction = new JSONObject();
 
         sendToTransaction.put("transactionId",transactionId);
-        sendToTransaction.put("TransactionStaus","SUCCESS");
+        sendToTransaction.put("TransactionStatus","SUCCESS");
 
         String sendMessage =  sendToTransaction.toString();
 
@@ -93,7 +100,7 @@ public class WalletService {
             JSONObject sendToTransaction = new JSONObject();
 
             sendToTransaction.put("transactionId",transactionId);
-            sendToTransaction.put("TransactionStaus","FAILED");
+            sendToTransaction.put("TransactionStatus","FAILED");
             String sendMessage =  sendToTransaction.toString();
 
             kafkaTemplate.send("update_transaction",sendMessage);

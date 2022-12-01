@@ -30,7 +30,7 @@ public class Transaction {
 
     private int amount;
 
-    private TransactionStatus status;
+    private String status;
 
     private String transactionTime;
 
